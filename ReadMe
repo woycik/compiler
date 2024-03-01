@@ -1,0 +1,27 @@
+Autor projektu: Aleksandra Wójcik 268488
+
+Opis projektu kompilatora:
+
+Aby skompilować projekt, należy wpisać poniższą komendę w terminalu:
+make
+
+Narzędzia:
+bison (GNU Bison) 3.8.2
+flex 2.6.4
+GNU Make 4.3
+g++ 11.4.0
+
+Opis struktury projektu:
+
+Plikiem głównym programu, łączący wszytkie inne jego części jest main.cpp.
+Pozostałe pliki podzielone są na dwie kategorie:
+
+- Back - Pliki z tego katalogu odpowiadają za generowanie kodu maszynowgo oraz zarządzanie pamięcią.
+  - CodeGenerator.hpp - jest kluczowym elementem kompilatora, odpowiedzialnym za przekształcanie informacji z ast na kod maszyny wirtualnej. Zawiera funkcje generujące konkretne instrukcje, obsługujące operacje arytmetyczne, logiczne, przypisania, warunki, pętle, itp.
+  - Memory.hpp - jest odpowiedzialny za efektywne zarządzanie pamięcią w trakcie generowania kodu maszynowego. Kluczowym zadaniem jest również śledzenie dostępnych miejsc w pamięci.
+  - AsmInstruction.hpp - odpowiada, za generowanie instrukcji zrozumiałych dla maszyny wirtualnej.
+- Front - Pliki odpowiezialne za analizę leksykalną,składniową oraz semantyczną.
+  -lexer.l - Głównym zadaniem tego pliku jest analiza znaków w źródłowym kodzie programu i przypisanie do nich odpowiednich leksemów (tokenów).
+  - parser.y - Parser sprawdza, czy sekwencja tokenów zgodna jest z zasadami gramatyki. W przypadku wykrycia błędów składniowych, parser generuje odpowiednie komunikaty o błędach.
+  - ast.hpp - zawiera implementację struktury danych reprezentującej drzewo ast.
+  - SemanticAnalyzer.hpp - skupia się głównie na analizie semantycznej kodu źródłowego. Jego zadaniem jest wykrywanie błędów i niezgodności semantycznych, które nie są związane z błędami składniowymi, ale dotyczą poprawności znaczeniowej programu.
