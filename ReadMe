@@ -1,27 +1,31 @@
-Autor projektu: Aleksandra Wójcik 268488
+# Project by: Aleksandra Wójcik 268488
 
-Opis projektu kompilatora:
+## Compiler Project Description:
 
-Aby skompilować projekt, należy wpisać poniższą komendę w terminalu:
+To compile the project, enter the following command in the terminal:
 make
 
-Narzędzia:
-bison (GNU Bison) 3.8.2
-flex 2.6.4
-GNU Make 4.3
-g++ 11.4.0
 
-Opis struktury projektu:
+## Tools:
+- bison (GNU Bison) 3.8.2
+- flex 2.6.4
+- GNU Make 4.3
+- g++ 11.4.0
 
-Plikiem głównym programu, łączący wszytkie inne jego części jest main.cpp.
-Pozostałe pliki podzielone są na dwie kategorie:
+## Project Structure Description:
 
-- Back - Pliki z tego katalogu odpowiadają za generowanie kodu maszynowgo oraz zarządzanie pamięcią.
-  - CodeGenerator.hpp - jest kluczowym elementem kompilatora, odpowiedzialnym za przekształcanie informacji z ast na kod maszyny wirtualnej. Zawiera funkcje generujące konkretne instrukcje, obsługujące operacje arytmetyczne, logiczne, przypisania, warunki, pętle, itp.
-  - Memory.hpp - jest odpowiedzialny za efektywne zarządzanie pamięcią w trakcie generowania kodu maszynowego. Kluczowym zadaniem jest również śledzenie dostępnych miejsc w pamięci.
-  - AsmInstruction.hpp - odpowiada, za generowanie instrukcji zrozumiałych dla maszyny wirtualnej.
-- Front - Pliki odpowiezialne za analizę leksykalną,składniową oraz semantyczną.
-  -lexer.l - Głównym zadaniem tego pliku jest analiza znaków w źródłowym kodzie programu i przypisanie do nich odpowiednich leksemów (tokenów).
-  - parser.y - Parser sprawdza, czy sekwencja tokenów zgodna jest z zasadami gramatyki. W przypadku wykrycia błędów składniowych, parser generuje odpowiednie komunikaty o błędach.
-  - ast.hpp - zawiera implementację struktury danych reprezentującej drzewo ast.
-  - SemanticAnalyzer.hpp - skupia się głównie na analizie semantycznej kodu źródłowego. Jego zadaniem jest wykrywanie błędów i niezgodności semantycznych, które nie są związane z błędami składniowymi, ale dotyczą poprawności znaczeniowej programu.
+The main program file, which integrates all other parts, is `main.cpp`.
+Other files are divided into two categories:
+
+### Back:
+Files in this directory are responsible for generating machine code and managing memory.
+- `CodeGenerator.hpp`: Key component of the compiler, responsible for transforming information from the AST into virtual machine code. It contains functions that generate specific instructions, handling arithmetic, logical operations, assignments, conditions, loops, etc.
+- `Memory.hpp`: Responsible for efficient memory management during code generation. Its key task is also to track available memory locations.
+- `AsmInstruction.hpp`: Responsible for generating instructions understandable by the virtual machine.
+
+### Front:
+Files responsible for lexical, syntax, and semantic analysis.
+- `lexer.l`: The main task of this file is to analyze characters in the source code and assign appropriate lexemes (tokens) to them.
+- `parser.y`: The parser checks whether the sequence of tokens complies with the grammar rules. In case of syntax errors, the parser generates appropriate error messages.
+- `ast.hpp`: Contains the implementation of the data structure representing the abstract syntax tree.
+- `SemanticAnalyzer.hpp`: Focuses mainly on semantic analysis of the source code. Its task is to detect semantic errors and inconsistencies that are not related to syntax errors but concern the correctness of the program's meaning.
